@@ -15,6 +15,9 @@ public class Main {
         linkedList.append(7);
         linkedList.append(7);
         linkedList.append(7);
+        linkedList.append(9);
+        linkedList.append(7);
+        linkedList.append(3);
         linkedList.append(3);
         linkedList.append(7);
         linkedList.append(3);
@@ -34,8 +37,8 @@ public class Main {
         System.out.print("Copied list \n");
 
         System.out.println("Remove dups...");
-        removeLinkedListDups(linkedList);
-        removeLinkedListDupsWithoutUsingBuffer(copiedLinkedList);
+        removeDups(linkedList);
+        removeDupsWithoutUsingBuffer(copiedLinkedList);
 
         printLinkedList(linkedList);
         System.out.print("First list \n");
@@ -43,12 +46,13 @@ public class Main {
         System.out.print("Copied list \n");
     }
 
-    public static void removeLinkedListDups(Node root) {
+    /**
+     * Runs in O(N) space & O(N) time.
+     */
+    public static void removeDups(Node node) {
         ArrayList<Integer> buffer = new ArrayList<>();
-        Node node = root;
         Node priorNode = null;
-
-        do {
+        while (node != null) {
             int item = node.data;
             if (buffer.contains(item)) {
                 //remove node from the chain.
@@ -59,27 +63,25 @@ public class Main {
             }
             node = node.next;
 
-        } while (node != null);
+        }
     }
 
-    public static void removeLinkedListDupsWithoutUsingBuffer(Node root) {
-        Node iNode = root;
-        do {
-            int iNodeData = iNode.data;
-            Node jNode = iNode.next;
-            Node priorJNode = iNode;
-            while (jNode != null) {
-                int jNodeData = jNode.data;
-                if (iNodeData == jNodeData) {
+    /**
+     * Runs in O(1) space & O(N*N) time.
+     */
+    public static void removeDupsWithoutUsingBuffer(Node current) {
+        while (current != null) {
+            Node runner = current;
+            while (runner.next != null) {
+                if (current.data == runner.next.data) {
                     //remove j node
-                    priorJNode.next = jNode.next;
+                    runner.next = runner.next.next;
                 } else {
-                    priorJNode = jNode;
+                    runner = runner.next;
                 }
-                jNode = jNode.next;
             }
-            iNode = iNode.next;
-        } while (iNode != null);
+            current = current.next;
+        }
     }
 
     public static Node returnCopyOfLinkedList(Node source) {
