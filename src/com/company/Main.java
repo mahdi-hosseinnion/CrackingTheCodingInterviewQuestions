@@ -1,5 +1,7 @@
 package com.company;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -9,7 +11,7 @@ public class Main {
     static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
-        Stack<String> stack = new Stack<>();
+        IntegerStack stack = new IntegerStack();
 
         loop:
         while (true) {
@@ -18,7 +20,8 @@ public class Main {
             switch (order) {
                 case "push":
                     System.out.println("What do your want to push into stack?");
-                    String data = sc.nextLine();
+                    Integer data = sc.nextInt();
+                    sc.nextLine();  // Consume newline left-over
                     stack.push(data);
                     break;
                 case "pop":
@@ -33,11 +36,14 @@ public class Main {
                 case "print":
                     stack.printAll();
                     break;
+                case "min":
+                    System.out.println(stack.getMin());
+                    break;
                 case "stop":
                     break loop;
                 default:
                     System.out.println("You did nothing!");
-                    break ;
+                    break;
             }
         }
     }
