@@ -1,15 +1,15 @@
-package com.company;
+package com.company.stack;
 
 import java.util.EmptyStackException;
 
-public class IntegerStack {
+public class StackWithMin {
 
 
-    IntegerNode top = null;
+    NodeWithMin top = null;
 
 
     public void push(Integer data) {
-        IntegerNode newTop = new IntegerNode(data);
+        NodeWithMin newTop = new NodeWithMin(data);
         newTop.next = top;
         if (top != null) {
             newTop.min = (top.min < data) ? top.min : data;
@@ -43,7 +43,7 @@ public class IntegerStack {
     }
 
     public void printAll() {
-        IntegerNode n = top;
+        NodeWithMin n = top;
         while (n != null) {
             System.out.println(n.data);
             n = n.next;

@@ -1,8 +1,7 @@
 package com.company;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
+import com.company.stack.StackWithMin;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 
@@ -11,7 +10,7 @@ public class Main {
     static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
-        IntegerStack stack = new IntegerStack();
+        StackWithMin stack = new StackWithMin();
 
         loop:
         while (true) {
