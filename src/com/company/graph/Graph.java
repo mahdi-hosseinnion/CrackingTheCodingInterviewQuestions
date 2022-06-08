@@ -1,14 +1,26 @@
 package com.company.graph;
 
-public class Graph<DATA> {
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.UUID;
 
-    private Node<DATA>[] nodes;
+public class Graph<D> {
 
-    public Node<DATA>[] getNodes() {
-        return nodes;
+    HashMap<Long, Node<D>> nodes = new HashMap<>();
+
+    void addNode(Node<D> node) {
+        nodes.put(node.getId(), node);
     }
 
-    public void setNodes(Node<DATA>[] nodes) {
-        this.nodes = nodes;
+    public static class Node<DATA> {
+
+        //Random id is used to differentiate between different nodes.
+        private long id = UUID.randomUUID().getMostSignificantBits();
+
+        public LinkedList<Node<DATA>> adjacent = new LinkedList<>();
+
+        public long getId() {
+            return id;
+        }
     }
 }
