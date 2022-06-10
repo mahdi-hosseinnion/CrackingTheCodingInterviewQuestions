@@ -6,21 +6,33 @@ import java.util.UUID;
 
 public class Graph<D> {
 
-    HashMap<Long, Node<D>> nodes = new HashMap<>();
+    public HashMap<Long, Node<D>> nodes = new HashMap<>();
 
-    void addNode(Node<D> node) {
+    public void addNode(Node<D> node) {
         nodes.put(node.getId(), node);
+    }
+
+    public Node<D> getNode(Long id) {
+        return nodes.get(id);
     }
 
     public static class Node<DATA> {
 
+        final DATA data;
+
         //Random id is used to differentiate between different nodes.
-        private long id = UUID.randomUUID().getMostSignificantBits();
+        private final long id = UUID.randomUUID().getMostSignificantBits();
 
         public LinkedList<Node<DATA>> adjacent = new LinkedList<>();
+
+        public Node(DATA data) {
+            this.data = data;
+        }
 
         public long getId() {
             return id;
         }
+
+
     }
 }
