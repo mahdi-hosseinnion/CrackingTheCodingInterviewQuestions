@@ -15,82 +15,35 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Graph<String> graph = instantiateProgramingLanguageGraph();
+        System.out.println("Enter N: ");
+        int n = sc.nextInt();
 
-        boolean first = hasRouteBetweenNodesWithBFS(graph.getNode(programmingLanguages.getId()), python);
-        if (first) System.out.println("First done");
+        System.out.println("Enter M: ");
+        int m = sc.nextInt();
 
-        boolean second = hasRouteBetweenNodesWithBFS(graph.getNode(programmingLanguages.getId()), assemblyLanguages);
-        if (second) System.out.println("Second done");
+        System.out.println("Enter i:");
+        int i = sc.nextInt();
 
-        boolean third = hasRouteBetweenNodesWithBFS(graph.getNode(programmingLanguages.getId()), new Node<>("Hey"));
-        if (!third) System.out.println("Third done");
+        System.out.println("Enter j:");
+        int j = sc.nextInt();
 
-        boolean forth = hasRouteBetweenNodesWithBFS(highLevelLanguages, java);
-        if (forth) System.out.println("Forth done");
-
-        boolean fifth = hasRouteBetweenNodesWithBFS(highLevelLanguages, assemblyLanguages);
-        if (!fifth) System.out.println("Fifth done");
-
-        boolean sixth = hasRouteBetweenNodesWithBFS(java, highLevelLanguages);
-        if (!sixth) System.out.println("Sixth done");
-
+        int result = insertion(n, m, i, j);
+        System.out.println("Result: " + result);
     }
 
-    public static <T> boolean hasRouteBetweenNodesWithBFS(Node<T> source, Node<T> destination) {
-        Queue<Node<T>> nextToSearch = new Queue<>();
-        HashSet<Long> visitedNodes = new HashSet<>();
+    /**
+     * Insert M into N so that M starts at bit j and ends at bit i. j through i must have enough space to fit all of M.
+     * ex) if M = 10011, then there must be at least 5 bit between j and i.
+     * <p>
+     * EXAMPLE:
+     * Input 	N = 10000000000, M = 10011, i =2, j = 6
+     * Output: N = 10001001100
+     *
+     * @return N value after inserting the M into it.
+     */
+    public static int insertion(int n, int m, int i, int j) {
 
-        nextToSearch.enqueue(source);
 
-        while (!nextToSearch.isEmpty()) {
-            Node<T> item = nextToSearch.dequeue();
-
-            if (item == destination) {
-                return true;
-            }
-
-            if (visitedNodes.contains(item.getId())) {
-                continue;
-            }
-            visitedNodes.add(item.getId());
-
-            for (Node<T> child : item.adjacent) {
-                nextToSearch.enqueue(child);
-            }
-        }
-        return false;
-    }
-
-    //Test data
-    static Node<String> programmingLanguages = new Node<>("programming languages");
-    static Node<String> machineLanguages = new Node<>("Machine languages");
-    static Node<String> assemblyLanguages = new Node<>("Assembly languages");
-    static Node<String> highLevelLanguages = new Node<>("High-level languages");
-
-    static Node<String> binary = new Node<>("Binary code");
-    static Node<String> machine = new Node<>("Machine code");
-    static Node<String> c = new Node<>("C");
-    static Node<String> cpp = new Node<>("C++");
-    static Node<String> java = new Node<>("Java");
-    static Node<String> python = new Node<>("Python");
-
-    private static Graph<String> instantiateProgramingLanguageGraph() {
-
-        machineLanguages.adjacent.add(binary);
-        machineLanguages.adjacent.add(machine);
-        programmingLanguages.adjacent.add(machineLanguages);
-
-        assemblyLanguages.adjacent.add(c);
-        assemblyLanguages.adjacent.add(cpp);
-        programmingLanguages.adjacent.add(assemblyLanguages);
-
-        highLevelLanguages.adjacent.add(java);
-        highLevelLanguages.adjacent.add(python);
-        programmingLanguages.adjacent.add(highLevelLanguages);
-
-        Graph<String> graph = new Graph<>();
-        graph.addNode(programmingLanguages);
-        return graph;
+        return n;
     }
 }
