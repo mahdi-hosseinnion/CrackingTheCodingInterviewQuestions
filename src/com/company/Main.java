@@ -22,8 +22,11 @@ public class Main {
         System.out.println("Enter j:");
         int j = sc.nextInt();
 
+        System.out.println("N value in binary is:       " + Integer.toBinaryString(n));
+        System.out.println("M value in binary is:       " + Integer.toBinaryString(m));
         int result = insertion(n, m, i, j);
         System.out.println("Result: " + result);
+        System.out.println("Result value in binary is:  " + Integer.toBinaryString(result));
     }
 
     /**
@@ -38,6 +41,13 @@ public class Main {
      */
     public static int insertion(int n, int m, int i, int j) {
 
+        for (int x = i; x <= j; x++) {
+            if (getBitAt(m, x-i)) {
+                n = setBitAt(n, x);
+            } else {
+                n = clearBitAt(n, x);
+            }
+        }
 
         return n;
     }
@@ -47,8 +57,8 @@ public class Main {
      *
      * @param i position from 0 to n.
      */
-    public static int getBitAt(int number, int i) {
-        return ((number & (1 << i)) != 0) ? 1 : 0;
+    public static boolean getBitAt(int number, int i) {
+        return ((number & (1 << i)) != 0);
     }
 
     /**
