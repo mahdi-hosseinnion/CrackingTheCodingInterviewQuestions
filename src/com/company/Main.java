@@ -1,11 +1,6 @@
 package com.company;
 
 
-import com.company.graph.Graph;
-import com.company.graph.Graph.Node;
-import com.company.util.Queue;
-
-import java.util.HashSet;
 import java.util.Scanner;
 
 
@@ -45,5 +40,32 @@ public class Main {
 
 
         return n;
+    }
+
+    /**
+     * Return the bit value (1 or 0) at position i.
+     *
+     * @param i position from 0 to n.
+     */
+    public static int getBitAt(int number, int i) {
+        return ((number & (1 << i)) != 0) ? 1 : 0;
+    }
+
+    /**
+     * Set the bit at position i to 1.
+     *
+     * @param i position from 0 to n.
+     */
+    public static int setBitAt(int number, int i) {
+        return number | (1 << i);
+    }
+
+    /**
+     * Set the bit at position i to 0.
+     *
+     * @param i position from 0 to n.
+     */
+    public static int clearBitAt(int number, int i) {
+        return number & (~(1 << i));
     }
 }
